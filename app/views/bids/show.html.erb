@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+<%= turbo_stream_from @bid%>
+<div id="<%= dom_id(@bid)%>">
+    <%= render @bid %>
+</div>
+<div>
+  <%= link_to "Edit this bid", edit_bid_path(@bid) %> |
+  <%= link_to "Back to bids", bids_path %>
+
+  <%= button_to "Destroy this bid", @bid, method: :delete %>
+</div>

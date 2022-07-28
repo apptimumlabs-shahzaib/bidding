@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Products</h1>
+<div id="new_product">
+<%= render partial:"products/form", locals:{product: Product.new} %>
+</div >
+
+
+<div id="products">
+<div class="row">
+    <%= render @products %>
+</div>
+
+<%= link_to "New product", new_product_path ,:class=>"btn btn-primary mt-3"%>

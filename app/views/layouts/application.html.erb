@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>Bidding</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+  
+  </head>
+  <body >
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between" style="padding:15px">
+  <a class="navbar-brand" href="#"><%= image_tag "/assets/coin.png" ,style:"width:38px;top: 80px;"%>Bidd</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <%if user_signed_in?%>
+      <li class="nav-item <%= 'active' if current_page?(products_path) %>">
+        <%= link_to "Products","/products", :method => :get,:class=>"nav-link"%>
+      </li>
+      <li class="nav-item <%= 'active' if current_page?(bids_path) %>">
+      <%= link_to "Bids", "/bids", :method => :get ,:class =>"nav-link"%>
+      </li>
+      <li class="nav-item <%= 'active' if current_page?(bids_path) %>">
+      <%= link_to "Your Products", "/myproducts", :method => :get ,:class =>"nav-link"%>
+      </li>
+    </ul>
+      <%# <div class="nav-item"> %>
+      <%# <div class="container" style="position:relative" id="notifyicon">
+        <% count = PublicActivity::Activity.where(recipient_id:current_user&.id,parameters:{}).count%>
+        <%# <a href="/activities">
+          <%= image_tag "/assets/notification.png" ,style:"width:28px; padding-top:5px;", id:"notificationIcon"%>
+        <%# </a> 
+        <%if count > 0  %> 
+        <%# <span style="font-size:10px; position: absolute;top: 4px;left: 28px;color:white;" class="badge badge-secondary"><%=count</span> 
+        <%end%>
+      <%# </div> %>
+      <%# </div> %>
+      <div class="nav-item avatar dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-saju" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img src="/assets/user.png" class="rounded-circle z-depth-0" alt="avatar image" style="width:38px;">
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown"
+          aria-labelledby="navbarDropdownMenuLink-saju">
+          <%user = User.find(current_user.id)%>
+          <a class="dropdown-item" href="#"><%= user.first_name + " " + user.last_name%></a>
+        </div>
+      </div>
+      <div>
+   <%= button_to "Sign out", destroy_user_session_path, :method => :delete ,:class =>"btn btn btn-outline-light"%>
+   </div>
+   <%end%>
+
+  </div>
+</nav>
+  <div style="margin:10px">
+    <%= yield %>
+    </div>
+  </body>
+</html>
